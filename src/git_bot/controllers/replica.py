@@ -39,22 +39,22 @@ __license__ = "Apache License, Version 2.0"
 
 import appier
 
+import git_bot
+
 from . import adapter
 
 class ReplicaController(adapter.AdapterController):
 
     @appier.route("/replicas/<str:id>", "GET")
     def show(self, id):
-        id = self._resolve_id(id)
         self.ensure_key()
-        api = self.get_api()
-        service = api.get_service(id)
-        return service
+        replica = git_bot.Replica.get_e(id = id, map = True)
+        return replica
 
     @appier.route("/replicas/<str:id>/sync", ("GET", "POST"))
-    def restart(self, id):
-        id = self._resolve_id(id)
+    def sync(self, id):
         self.ensure_key()
-        api = self.get_api()
-        service = api.restart_service(id)
-        return service
+        replica = git_bot.Replica.get_e(id = id)
+        replica.sync()
+        replica = replica.reload(map = True)
+        return replica
