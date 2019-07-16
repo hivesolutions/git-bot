@@ -92,10 +92,10 @@ class Replica(base.GitBotBase):
 
         if self.is_repo_new:
             appier.Git.clone(self.origin_url, path = self.base_path)
+            appier.Git.add_upstream(self.target_url, path = self.repo_path)
 
-        appier.Git.add_upstream(self.target_url, path = self.repo_path)
-        appier.Git.fetch(flags = ["origin", "--all"], path = self.repo_path)
-        appier.Git.pull(flags = ["origin", "--all"], path = self.repo_path)
+        appier.Git.fetch(flags = ["origin"], path = self.repo_path)
+        appier.Git.pull(flags = ["origin"], path = self.repo_path)
         appier.Git.push(flags = ["upstream", "--all"], path = self.repo_path)
 
     @property
