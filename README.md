@@ -1,2 +1,3 @@
-# git_bot
-Simple bot for the update and sync of multiple repos
+# Git Bot
+
+Simple bot for the update and sync of multiple repos.
