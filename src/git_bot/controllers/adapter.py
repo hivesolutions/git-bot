@@ -39,8 +39,6 @@ __license__ = "Apache License, Version 2.0"
 
 import appier
 
-import git
-
 class AdapterController(appier.Controller):
 
     def ensure_key(self, data = None):
@@ -54,7 +52,3 @@ class AdapterController(appier.Controller):
         raise appier.SecurityError(
             message = "Mismatch Git key"
         )
-
-    def get_api(self):
-        api = git.API()
-        return api
