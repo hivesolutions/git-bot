@@ -87,6 +87,11 @@ class Replica(base.GitBotBase):
         if self.is_repo_new:
             appier.Git.clone(self.origin_url, path = self.base_path)
 
+        appier.Git.add_upstream(self.target_url, path = self.repo_path)
+        appier.Git.fetch(flags = ["--all"], path = self.repo_path)
+        appier.Git.pull(flags = ["--all"], path = self.repo_path)
+        appier.Git.push(flags = ["origin", "--all"], path = self.repo_path)
+
     @property
     def base_path(self):
         base_path = appier.conf("REPOS_PATH", "repos")
@@ -111,5 +116,5 @@ class Replica(base.GitBotBase):
     @property
     def is_repo_new(self):
         if not os.path.exists(self.repo_path): return True
-        if not os.listdir(self.repo_path): return True
+        if not (name for name in os.listdir(self.repo_path) if not name in (".git",)): return True
         return False
