@@ -37,23 +37,10 @@ __copyright__ = "Copyright (c) 2008-2019 Hive Solutions Lda."
 __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
-import appier
 import appier_extras
 
-class GitBotApp(appier.WebApp):
+class GitBotBase(appier_extras.admin.Base):
 
-    def __init__(self, *args, **kwargs):
-        appier.WebApp.__init__(
-            self,
-            name = "git_bot",
-            parts = (
-                appier_extras.AdminPart,
-            ),
-            *args, **kwargs
-        )
-
-if __name__ == "__main__":
-    app = GitBotApp()
-    app.serve()
-else:
-    __path__ = []
+    @classmethod
+    def is_abstract(cls):
+        return True

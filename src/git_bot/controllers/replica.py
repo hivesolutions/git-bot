@@ -41,9 +41,9 @@ import appier
 
 from . import adapter
 
-class ServiceController(adapter.AdapterController):
+class ReplicaController(adapter.AdapterController):
 
-    @appier.route("/services/<str:id>", "GET")
+    @appier.route("/replicas/<str:id>", "GET")
     def show(self, id):
         id = self._resolve_id(id)
         self.ensure_key()
@@ -51,27 +51,10 @@ class ServiceController(adapter.AdapterController):
         service = api.get_service(id)
         return service
 
-    @appier.route("/services/<str:id>/redeploy", ("GET", "POST"))
-    def redeploy(self, id):
-        id = self._resolve_id(id)
-        self.ensure_key()
-        api = self.get_api()
-        service = api.upgrade_service(id)
-        return service
-
-    @appier.route("/services/<str:id>/restart", ("GET", "POST"))
+    @appier.route("/replicas/<str:id>/sync", ("GET", "POST"))
     def restart(self, id):
         id = self._resolve_id(id)
         self.ensure_key()
         api = self.get_api()
         service = api.restart_service(id)
         return service
-
-    def _resolve_id(self, id):
-        stack = self.field("stack", None)
-        resolve = self.field("resolve", True, cast = bool)
-        if not resolve: return id
-        api = self.get_api()
-        service = api.get_service_safe(id, stack = stack)
-        if not service: return id
-        return service.get("id", id)

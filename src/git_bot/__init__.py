@@ -35,7 +35,9 @@ __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
 from . import controllers
+from . import models
 from . import main
 
 from .controllers import *
+from .models import *
 from .main import GitBotApp
