@@ -54,7 +54,7 @@ class Replica(base.GitBotBase):
     target_url = appier.field(
         immutable = True,
         meta = "url",
-        description = "Origin URL"
+        description = "Target URL"
     )
 
     branches = appier.field(
@@ -76,16 +76,27 @@ class Replica(base.GitBotBase):
             appier.not_empty("branches")
         ]
 
-    def sync(self):
-        is_new = not os.path.exists(self.repo_path)
+    @classmethod
+    def list_names(cls):
+        return ["id", "origin_url", "target_url", "branches"]
 
-        if not is_new:
-            appier.Git.clone(self.origin_url, path = self.repo_path)
+    def sync(self):
+        if not os.path.exists(self.base_path):
+            os.makedirs(self.base_path)
+
+        if self.is_repo_new:
+            appier.Git.clone(self.origin_url, path = self.base_path)
+
+    @property
+    def base_path(self):
+        base_path = appier.conf("REPOS_PATH", "repos")
+        base_path = os.path.abspath(base_path)
+        base_path = os.path.normpath(base_path)
+        return base_path
 
     @property
     def repo_path(self):
-        base_path = appier.conf("REPOS_PATH", "repos")
-        repo_path = os.path.join(base_path, self.repo_name)
+        repo_path = os.path.join(self.base_path, self.repo_name)
         repo_path = os.path.abspath(repo_path)
         repo_path = os.path.normpath(repo_path)
         return repo_path
@@ -96,3 +107,9 @@ class Replica(base.GitBotBase):
         basename = os.path.basename(origin_url_p.path)
         if basename.endswith(".git"): return basename[:-4]
         return basename
+
+    @property
+    def is_repo_new(self):
+        if not os.path.exists(self.repo_path): return True
+        if not os.listdir(self.repo_path): return True
+        return False

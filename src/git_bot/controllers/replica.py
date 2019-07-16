@@ -45,13 +45,13 @@ from . import adapter
 
 class ReplicaController(adapter.AdapterController):
 
-    @appier.route("/replicas/<str:id>", "GET")
+    @appier.route("/replicas/<int:id>", "GET")
     def show(self, id):
         self.ensure_key()
         replica = git_bot.Replica.get_e(id = id, map = True)
         return replica
 
-    @appier.route("/replicas/<str:id>/sync", ("GET", "POST"))
+    @appier.route("/replicas/<int:id>/sync", ("GET", "POST"))
     def sync(self, id):
         self.ensure_key()
         replica = git_bot.Replica.get_e(id = id)
