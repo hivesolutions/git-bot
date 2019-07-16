@@ -20,3 +20,4 @@ ADD src /src
 RUN pip3 install -r /requirements.txt && pip3 install -r /extra.txt && pip3 install --upgrade netius
 
 CMD ["/usr/bin/python3", "/src/git_bot/main.py"]
+ 
