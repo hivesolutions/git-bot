@@ -38,6 +38,7 @@ __license__ = "Apache License, Version 2.0"
 """ The license for the module """
 
 import os
+import shutil
 
 import appier
 
@@ -79,6 +80,11 @@ class Replica(base.GitBotBase):
     @classmethod
     def list_names(cls):
         return ["id", "origin_url", "target_url", "branches"]
+
+    def post_delete(self):
+        base.GitBotBase.post_delete(self)
+        if os.path.exists(self.repo_path):
+            shutil.rmtree(self.repo_path, ignore_errors = True)
 
     def sync(self):
         if not os.path.exists(self.base_path):
