@@ -11,6 +11,7 @@ ENV SERVER_ENCODING gzip
 ENV HOST 0.0.0.0
 ENV PORT 8080
 ENV PYTHONPATH /src
+ENV REPOS_PATH /repos
 
 ADD requirements.txt /
 ADD extra.txt /
