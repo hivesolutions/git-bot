@@ -98,6 +98,12 @@ class Replica(base.GitBotBase):
         appier.Git.pull(flags = ["--all"], path = self.repo_path)
 
         for branch in self.branches:
+            if not branch in appier.Git.get_branches(names = True, path = self.repo_path):
+                appier.Git.checkout(
+                    branch = "origin/" + branch,
+                    flags = ["-b", branch],
+                    path = self.repo_path
+                )
             appier.Git.checkout(branch = branch, path = self.repo_path)
             appier.Git.pull(flags = ["--all"], path = self.repo_path)
 
