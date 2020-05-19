@@ -86,6 +86,7 @@ class Replica(base.GitBotBase):
         if os.path.exists(self.repo_path):
             shutil.rmtree(self.repo_path, ignore_errors = True)
 
+    @appier.operation(name = "Sync")
     def sync(self):
         if not os.path.exists(self.base_path):
             os.makedirs(self.base_path)
