@@ -6,7 +6,7 @@ Should be able to easily allow use-cases of integration between GiLab and GitHub
 
 ## Configuration
 
-| Name           | Type  | Description                                                                           |
-| -------------- | ----- | ------------------------------------------------------------------------------------- |
-| **GIT_KEY**    | `str` | The secret key to be used by Git Bot clients for authentication (defaults to `None`). |
-| **REPOS_PATH** | `str` | The local filesystem path to store the Git repositories (defaults to `repos`).        |
+| Name           | Type  | Default | Description                                                      |
+| -------------- | ----- | ------- | ---------------------------------------------------------------- |
+| **GIT_KEY**    | `str` | `None`  | The secret key to be used by Git Bot clients for authentication. |
+| **REPOS_PATH** | `str` | `repos` | The local filesystem path to store the Git repositories.         |
