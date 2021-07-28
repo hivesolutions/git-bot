@@ -111,6 +111,30 @@ class Replica(base.GitBotBase):
         appier.Git.push(flags = ["upstream", "--all"], path = self.repo_path)
         appier.Git.push(flags = ["upstream", "--tags"], path = self.repo_path)
 
+    @appier.operation(name = "Rebuild")
+    def rebuild(self):
+        if os.path.exists(self.repo_path):
+            shutil.rmtree(self.repo_path, ignore_errors = True)
+        self.sync()
+
+    @appier.operation(
+        name = "Set Origin URL",
+        parameters = (("Origin URL", "origin_url", str),)
+    )
+    def set_target_path(self, origin_url):
+        self.origin_url = origin_url
+        self.save(immutables_a = False)
+        self.rebuild()
+
+    @appier.operation(
+        name = "Set Target URL",
+        parameters = (("Target URL", "target_url", str),)
+    )
+    def set_target_path(self, target_url):
+        self.target_url = target_url
+        self.save(immutables_a = False)
+        self.rebuild()
+
     @property
     def base_path(self):
         base_path = appier.conf("REPOS_PATH", "repos")
