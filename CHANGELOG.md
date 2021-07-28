@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Issue related with duplicate method name for `Replica` model operations
 
+## [0.1.1] - 2021-07-28
+
+### Fixed
+
+* Issue related with duplicate method name for `Replica` model operations
+
 ## [0.1.0] - 2021-07-28
 
 ### Added

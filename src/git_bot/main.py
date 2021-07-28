@@ -53,7 +53,7 @@ class GitBotApp(appier.WebApp):
         )
 
     def _version(self):
-        return "0.1.0"
+        return "0.1.1"
 
     def _description(self):
         return "Git Bot"
