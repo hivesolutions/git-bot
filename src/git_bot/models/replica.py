@@ -121,7 +121,7 @@ class Replica(base.GitBotBase):
         name = "Set Origin URL",
         parameters = (("Origin URL", "origin_url", str),)
     )
-    def set_target_path(self, origin_url):
+    def set_origin_url(self, origin_url):
         self.origin_url = origin_url
         self.save(immutables_a = False)
         self.rebuild()
@@ -130,7 +130,7 @@ class Replica(base.GitBotBase):
         name = "Set Target URL",
         parameters = (("Target URL", "target_url", str),)
     )
-    def set_target_path(self, target_url):
+    def set_target_url(self, target_url):
         self.target_url = target_url
         self.save(immutables_a = False)
         self.rebuild()
