@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Support for override of URLs in `Replica`entity
+*
 
 ### Changed
 
@@ -18,3 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.1.0] - 2021-07-28
+
+### Added
+
+* Initial release
+* Support for override of URLs in `Replica` entity

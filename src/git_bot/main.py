@@ -52,6 +52,15 @@ class GitBotApp(appier.WebApp):
             *args, **kwargs
         )
 
+    def _version(self):
+        return "0.1.0"
+
+    def _description(self):
+        return "Git Bot"
+
+    def _observations(self):
+        return "Automation made easy for Git"
+
 if __name__ == "__main__":
     app = GitBotApp()
     app.serve()
