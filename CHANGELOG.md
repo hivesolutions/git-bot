@@ -17,7 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* Issue related with duplicate method name for `Replica` model operations
+*
+
+## [0.1.2] - 2022-06-04
+
+### Changed
+
+* Bumped dependency versions
 
 ## [0.1.1] - 2021-07-28
 
