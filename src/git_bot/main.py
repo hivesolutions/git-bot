@@ -45,7 +45,7 @@ class GitBotApp(appier.WebApp):
     def __init__(self, *args, **kwargs):
         appier.WebApp.__init__(
             self,
-            name = "git_bot",
+            name = "git-bot",
             parts = (
                 appier_extras.AdminPart,
             ),
